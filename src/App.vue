@@ -2,7 +2,7 @@
   <div>
     <div>{{ message }}</div>
 
-    <a href="/.auth/login/github">Login</a>
+    <a href="/.auth/login/aadb2c">Login</a>
 
 
     <div>{{ clientPrincipal }}</div>
