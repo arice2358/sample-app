@@ -2,7 +2,7 @@
   <div>
     <div>{{ message }}</div>
 
-    <a href="/.auth/login/aadb2c">Login</a>
+    <a href="/.auth/login/aadb2c?post_login_redirect_uri=https://nice-wave-049615103.3.azurestaticapps.net/"></a>">Login</a>
 
 
     <div>{{ clientPrincipal }}</div>
