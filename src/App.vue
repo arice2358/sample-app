@@ -25,7 +25,7 @@ export default {
 
     const response = await fetch('/.auth/me');
     const payload = await response.json();
-    this.clientPrincipal = payload;
+    this.clientPrincipal = payload.userDetails;
 
 
 
