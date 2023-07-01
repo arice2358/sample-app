@@ -5,7 +5,7 @@
     <a href="/.auth/login/aadb2c">Login</a>
 
 
-    <div>{{ clientPrincipal.userDetails }}</div>
+    <div>{{ clientPrincipal }}</div>
 
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       message: "",
-      clientPrincipal: ""
+      clientPrincipal: null
     };
   },
   async mounted() {
@@ -25,7 +25,7 @@ export default {
 
     const response = await fetch('/.auth/me');
     const payload = await response.json();
-    this.clientPrincipal = payload.userDetails;
+    this.clientPrincipal = payload;
 
 
 
