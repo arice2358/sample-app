@@ -1,12 +1,9 @@
 <template>
   <div>
     <div>{{ message }}</div>
-
-    <a href="/.auth/login/aadb2c">Login</a>
-
-
+    <a href="/.auth/login/aadb2c">Login Email</a>
+    <a href="/.auth/login/profile">Edit Profile</a>
     <div>{{ clientPrincipal }}</div>
-
   </div>
 </template>
 
@@ -26,9 +23,6 @@ export default {
     const response = await fetch('/.auth/me');
     const payload = await response.json();
     this.clientPrincipal = payload;
-
-
-
   }
 };
 </script>
