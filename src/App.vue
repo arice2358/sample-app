@@ -15,10 +15,7 @@
 </template>
 
 <script>
-import { signIn } from './authRedirect';
-
-
-
+import * as authRedirect from './authRedirect';
 
 export default {
   name: "App",
@@ -35,6 +32,9 @@ export default {
     const response = await fetch('/.auth/me');
     const payload = await response.json();
     this.clientPrincipal = payload;
+  },
+  signIn() {
+    authRedirect.signIn();
   }
 };
 </script>
