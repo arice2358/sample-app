@@ -15,6 +15,11 @@
 </template>
 
 <script>
+import { signIn } from './authRedirect';
+
+
+
+
 export default {
   name: "App",
   data() {
