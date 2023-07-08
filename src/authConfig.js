@@ -6,7 +6,7 @@
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/working-with-b2c.md 
  */
 
-const msalConfig = {
+export const msalConfig = {
     auth: {
       clientId: "9c188c62-253a-4795-8eb7-606f17ce5993", // This is the ONLY mandatory field; everything else is optional.
       authority: b2cPolicies.authorities.signUpSignIn.authority, // Choose sign-up/sign-in user-flow as your default.
@@ -49,7 +49,7 @@ const msalConfig = {
  * For more information about OIDC scopes, visit: 
  * https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
-const loginRequest = {
+export const loginRequest = {
     scopes: ["openid", ...apiConfig.b2cScopes],
   };
   
@@ -58,7 +58,9 @@ const loginRequest = {
    * To learn more about how to work with scopes and resources, see: 
    * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
    */
-  const tokenRequest = {
+  export const tokenRequest = {
     scopes: [...apiConfig.b2cScopes],  // e.g. ["https://fabrikamb2c.onmicrosoft.com/helloapi/demo.read"]
     forceRefresh: false // Set this to "true" to skip a cached token and go to the server to get a new token
   };
+
+  

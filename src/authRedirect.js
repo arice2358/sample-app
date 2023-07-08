@@ -1,6 +1,6 @@
 // Create the main myMSALObj instance
 // configuration parameters are located at authConfig.js
-const myMSALObj = new msal.PublicClientApplication(msalConfig);
+export const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let accountId = "";
 let username = "";
@@ -30,7 +30,7 @@ function setAccount(account) {
     welcomeUser(username);
 }
 
-function selectAccount() {
+export function selectAccount() {
 
     /**
      * See here for more information on account retrieval: 
@@ -78,7 +78,7 @@ function selectAccount() {
 // in case of page refresh
 selectAccount();
 
-async function handleResponse(response) {
+export async function handleResponse(response) {
 
     /**
      * To see the full list of response object properties, visit:
@@ -92,7 +92,7 @@ async function handleResponse(response) {
     }
 }
 
-function signIn() {
+export function signIn() {
 
     /**
      * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
@@ -102,7 +102,7 @@ function signIn() {
     myMSALObj.loginRedirect(loginRequest);
 }
 
-function signOut() {
+export function signOut() {
 
     /**
      * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
@@ -116,7 +116,7 @@ function signOut() {
     myMSALObj.logoutRedirect(logoutRequest);
 }
 
-function getTokenRedirect(request) {
+export function getTokenRedirect(request) {
 
     /**
     * See here for more info on account retrieval: 
@@ -150,7 +150,7 @@ function getTokenRedirect(request) {
 }
  
 // Acquires and access token and then passes it to the API call
-function passTokenToApi() {
+export function passTokenToApi() {
     if (!accessToken) {
         getTokenRedirect(tokenRequest);
     } else {
@@ -167,7 +167,7 @@ function passTokenToApi() {
  * the full authority string of that user-flow e.g.
  * https://fabrikamb2c.b2clogin.com/fabrikamb2c.onmicrosoft.com/B2C_1_edit_profile_v2 
  */
-function editProfile() {
+export function editProfile() {
 
 
     const editProfileRequest = b2cPolicies.authorities.editProfile;
