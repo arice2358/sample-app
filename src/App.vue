@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import * as authRedirect from './authRedirect';
-
 export default {
   name: "App",
   data() {
@@ -32,9 +30,6 @@ export default {
     const response = await fetch('/.auth/me');
     const payload = await response.json();
     this.clientPrincipal = payload;
-  },
-  signIn() {
-    authRedirect.signIn();
   }
 };
 </script>
