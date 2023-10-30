@@ -1,6 +1,6 @@
 <template>
   <v-layout class="rounded rounded-md">
-    <v-app-bar>
+    <v-app-bar :elevation="0" class="bg-teal-lighten-1">
       <v-img class="mx-2" src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
         max-height="40" max-width="40" contain></v-img>
 
@@ -21,7 +21,7 @@
       </template>
     </v-app-bar>
 
-    <v-main style="min-height: 300px">
+    <v-main style="min-height: 100vh" class="bg-teal-lighten-5">
       <div v-if="clientPrincipal.clientPrincipal">
         <v-container class="mb-6" style="max-width: 600px">
           <v-row no-gutters style="height: 150px;">
@@ -34,7 +34,7 @@
             <v-col>
               <!-- <v-card class="mx-auto" max-width="600"> -->
                 <v-sheet class="mx-auto">
-                <v-list>
+                <v-list class="bg-teal-lighten-5">
                   <v-list-item v-for="(item, index) in items" :key="item.id">
                     <template v-slot:prepend>
                       <v-list-item-action start>
@@ -65,7 +65,7 @@
       </div>
     </v-main>
   </v-layout>
-  {{ clientPrincipal }}
+  <!-- {{ clientPrincipal }} -->
 </template>
 
 <script setup>
