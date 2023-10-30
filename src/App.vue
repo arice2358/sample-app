@@ -15,7 +15,7 @@
           <v-btn variant="plain" href="/profile">Profile</v-btn>
         </div>
         <div v-else>
-          <v-btn variant="plain">Sign up</v-btn>
+          <!-- <v-btn variant="plain" href="/signup">Sign up</v-btn> -->
           <v-btn variant="plain" href="/login">Sign in</v-btn>
         </div>
       </template>
@@ -23,17 +23,17 @@
 
     <v-main style="min-height: 300px">
       <div v-if="clientPrincipal.clientPrincipal">
-        <v-container class="mb-6">
+        <v-container class="mb-6" style="max-width: 600px">
           <v-row no-gutters style="height: 150px;">
             <v-col align-self="center" align="center">
-              <v-text-field style="width: 600px" label="" variant="outlined" rounded="xl" v-model="todoDesc"
+              <v-text-field style="width: 100%" label="" variant="outlined" rounded="xl" v-model="todoDesc"
                 @keyup.enter="createTodo"></v-text-field>
             </v-col>
           </v-row>
           <v-row align="start" no-gutters>
             <v-col>
               <!-- <v-card class="mx-auto" max-width="600"> -->
-                <v-sheet class="mx-auto" :width="600">
+                <v-sheet class="mx-auto">
                 <v-list>
                   <v-list-item v-for="(item, index) in items" :key="item.id">
                     <template v-slot:prepend>
