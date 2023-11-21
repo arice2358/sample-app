@@ -10,11 +10,13 @@ class TaskDao {
    * @param {CosmosClient} cosmosClient
    * @param {string} databaseId
    * @param {string} containerId
+   * @param {string} userId
    */
-  constructor(cosmosClient, databaseId, containerId) {
+  constructor(cosmosClient, databaseId, containerId, userId) {
     this.client = cosmosClient
     this.databaseId = databaseId
     this.collectionId = containerId
+    this.userId = userId
 
     this.database = null
     this.container = null
@@ -35,12 +37,26 @@ class TaskDao {
     debug('Setting up the container...done!')
   }
 
-  async find(querySpec) {
+  async find() {
     debug('Querying for items from the database')
 
     if (!this.container) {
       throw new Error('Collection is not initialized.')
     }
+
+    // const querySpec = {
+    //   query: "SELECT * FROM root r"
+    // };
+
+    const querySpec = {
+      query: "SELECT * FROM root r WHERE r.owner=@owner",
+      parameters: [
+        {
+          name: "@owner",
+          value: this.userId
+        }
+      ]
+    };
 
     const { resources } = await this.container.items.query(querySpec).fetchAll()
     return resources
@@ -55,20 +71,23 @@ class TaskDao {
 
     item.date = Date.now()
     item.completed = false
+    item.owner = this.userId
     const { resource: doc } = await this.container.items.create(item)
     return doc
   }
 
   async updateItem(item) {
-    debug('Update an item in the database')    
+    debug('Update an item in the database')
 
     if (!this.container) {
       throw new Error('Collection is not initialized.')
     }
-    
+
+    item.owner = this.userId;
+
     const { resource: replaced } = await this.container
       .item(item.id, partitionKey)
-      .replace(item)
+      .replace(item, { accessCondition: { type: "IfMatch", condition: item.owner } });
     return replaced
   }
 
@@ -78,7 +97,7 @@ class TaskDao {
     if (!this.container) {
       throw new Error('Collection is not initialized.')
     }
-    
+
     const { resource } = await this.container.item(itemId, partitionKey).read()
     return resource
   }
@@ -90,7 +109,8 @@ class TaskDao {
       throw new Error('Collection is not initialized.')
     }
 
-    const { resource } = await this.container.item(item, item).delete();
+    item.owner = this.userId;
+    const { resource } = await this.container.item(item, item).delete({ accessCondition: { type: "IfMatch", condition: item.owner } });
   }
 }
 

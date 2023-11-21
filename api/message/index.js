@@ -1,5 +1,3 @@
-const customers = require('../data/customers.json');
-
 module.exports = async function (context, req) {
     context.log('Header: ' + req.headers['authorization']);
 
@@ -13,7 +11,6 @@ module.exports = async function (context, req) {
         headers: {
             'Content-Type': 'application/json'
         },
-        // body: customers
         body: JSON.parse(decoded)
     };
 
