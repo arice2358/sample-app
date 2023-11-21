@@ -2,7 +2,7 @@
   <v-app>
     <!-- <v-layout class="rounded rounded-md"> -->
     <v-app-bar :elevation="0" class="bg-primary-darken-2">
-      <v-img class="mx-2" src="./assets/logo.png" max-height="40" max-width="40" contain></v-img>
+      <v-img class="mx-2" src="src/assets/logo.png" max-height="40" max-width="40" contain></v-img>
 
       <v-appbar-title class="ml-2 text-h4"><span class="text-secondary">How</span><span
           class="text-accent font-weight-bold">DO</span></v-appbar-title>
