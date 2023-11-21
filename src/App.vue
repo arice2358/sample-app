@@ -67,7 +67,7 @@
             <v-col sm="12" md="4">
               <v-sheet class="ma-2 pa-2 bg-primary-darken-2">
                 <h2 class="text-h2 my-6">Getting stuff done starts with a list</h2>
-                <v-img class="d-flex d-md-none mx-2" src="src/assets/Mobile note list-pana.png" max-width="450"
+                <v-img class="d-flex d-md-none mx-2" :src="noteList" max-width="450"
                   contained></v-img>
                 <p class="text-h5 my-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                   incididunt ut labore
@@ -78,7 +78,7 @@
               </v-sheet>
             </v-col>
             <v-col md="4" class="d-none d-md-block">
-              <v-img class="mx-2" src="src/assets/Mobile note list-pana.png" max-width="500" contained></v-img>
+              <v-img class="mx-2" :src="noteList" max-width="500" contained></v-img>
             </v-col>
           </v-row>
         </v-container>
@@ -134,13 +134,6 @@
               <v-card border rounded elevation="4" class="fill-height ma-2 pa-2 d-flex flex-column">
                 <h2 class="text-h5 align-center justify-center text-center">Free</h2>
                 <h2 class="text-h3 align-center justify-center text-center">£0<span class="text-h6"> / mo</span></h2>
-                <!-- <v-list lines="one">
-                  <v-list-item v-for="n in 3" :key="n" :title="'Item ' + n">
-                    <template v-slot:prepend>
-                      <v-icon icon="mdi-check" color="secondary"></v-icon>
-                    </template>
-                  </v-list-item>
-                </v-list> -->
                 <v-list>
                   <v-list-item title="Create, edit, and delete tasks.">
                     <template v-slot:prepend>
@@ -288,7 +281,8 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import logo from '@/assets/logo.png'
+import logo from '@/assets/logo.png';
+import noteList from '@/assets/Mobile note list-pana.png';
 
 var todoDesc = ref("");
 var items = ref([]);
