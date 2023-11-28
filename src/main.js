@@ -14,8 +14,8 @@ const customTheme = {
   colors: {
     primary: '#247CAC',
     secondary: '#89E7C0',
-    background: '#FFFFFF',
-    surface: '#FFFFFF',
+    background: '##FFFBFD',
+    surface: '##FFFBFD',
     accent: 'FBC9A0',
     error: '#B00020',
     info: '#000000',

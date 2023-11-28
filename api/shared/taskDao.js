@@ -3,7 +3,7 @@ const CosmosClient = require('@azure/cosmos').CosmosClient
 const debug = require('debug')('todo:taskDao')
 
 // For simplicity we'll set a constant partition key
-const partitionKey = undefined
+const partitionKey = "/id"
 class TaskDao {
   /**
    * Manages reading, adding, and updating Tasks in Azure Cosmos DB
@@ -83,11 +83,17 @@ class TaskDao {
       throw new Error('Collection is not initialized.')
     }
 
+    let dbItem = await this.getItem(item.id);
+
+    if (dbItem.owner != this.userId) {
+      throw new Error('User not authorized to delete this item.');
+    }
+
     item.owner = this.userId;
 
     const { resource: replaced } = await this.container
-      .item(item.id, partitionKey)
-      .replace(item, { accessCondition: { type: "IfMatch", condition: item.owner } });
+      .item(item.id, item.id)
+      .replace(item);
     return replaced
   }
 
@@ -98,19 +104,25 @@ class TaskDao {
       throw new Error('Collection is not initialized.')
     }
 
-    const { resource } = await this.container.item(itemId, partitionKey).read()
+    const { resource } = await this.container.item(itemId, itemId).read()
     return resource
   }
 
-  async deleteItem(item) {
+  async deleteItem(itemId) {
     debug('Deleting an item from the database');
 
     if (!this.container) {
       throw new Error('Collection is not initialized.')
     }
 
-    item.owner = this.userId;
-    const { resource } = await this.container.item(item, item).delete({ accessCondition: { type: "IfMatch", condition: item.owner } });
+
+    let dbItem = await this.getItem(itemId);
+
+    if (dbItem.owner != this.userId) {
+      throw new Error('User not authorized to delete this item.');
+    }
+
+    const { resource } = await this.container.item(itemId, itemId).delete();
   }
 }
 

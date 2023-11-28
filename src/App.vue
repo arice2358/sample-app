@@ -8,16 +8,40 @@
           class="text-accent font-weight-bold">DO</span></v-appbar-title>
 
       <template v-slot:append>
-        <v-btn variant="plain" href="https://adamrice.dev" target="_blank">Blog</v-btn>
-        <div v-if="clientPrincipal.clientPrincipal">
-          <v-btn variant="plain" href="/logout">Sign out</v-btn>
-          <v-btn variant="plain" href="/profile">Profile</v-btn>
-        </div>
-        <div v-else>
-          <!-- <v-btn variant="plain" href="/signup">Sign up</v-btn> -->
-          <v-btn variant="plain" href="/login">Sign in</v-btn>
+
+        <!-- Use an overflow menu on XS screens -->
+        <v-menu class="d-flex d-sm-none">
+          <template v-slot:activator="{ props }">
+            <v-btn icon="mdi-dots-vertical" v-bind="props" class="text-secondary d-flex d-sm-none"></v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item appendIcon="mdi-open-in-new" href="https://adamrice.dev" target="_blank">Blog</v-list-item>
+
+            <div v-if="clientPrincipal.clientPrincipal">
+              <v-list-item href="/profile">Profile</v-list-item>
+              <v-list-item href="/logout">Sign out</v-list-item>
+            </div>
+            <div v-else>
+              <v-list-item href="/login">Sign in</v-list-item>
+            </div>
+          </v-list>
+        </v-menu>
+
+        <!-- Display all the links on the app bar on sm+ screens -->
+        <div class="d-none d-sm-flex">
+          <v-btn variant="plain" href="https://adamrice.dev" target="_blank" append-icon="mdi-open-in-new">Blog</v-btn>
+          <div v-if="clientPrincipal.clientPrincipal">
+            <v-btn variant="plain" href="/logout">Sign out</v-btn>
+            <v-btn variant="plain" href="/profile">Profile</v-btn>
+          </div>
+          <div v-else>
+            <v-btn variant="plain" href="/login">Sign in</v-btn>
+          </div>
         </div>
       </template>
+
+
     </v-app-bar>
 
     <!-- <v-main style="min-height: 100vh" class=""> -->
@@ -26,34 +50,48 @@
         <v-container class="mb-6" style="max-width: 600px">
           <v-row no-gutters style="height: 150px;">
             <v-col align-self="center" align="center">
-              <v-text-field style="width: 100%" label="" variant="outlined" rounded="xl" v-model="todoDesc"
-                @keyup.enter="createTodo"></v-text-field>
+              <v-text-field style="width: 100%" label="What are you working on?" variant="outlined" rounded="xl"
+                class="text-primary-darken-2" v-model="todoDesc" @keyup.enter="createTodo">
+                <template v-slot:append-inner>
+                  <v-fade-transition>
+                    <v-btn v-show="todoDesc" class="text-secondary" icon="mdi-plus-circle" variant="text"
+                      @click="createTodo"></v-btn>
+                  </v-fade-transition>
+                </template>
+              </v-text-field>
             </v-col>
           </v-row>
           <v-row align="start" no-gutters>
             <v-col>
               <!-- <v-card class="mx-auto" max-width="600"> -->
               <v-sheet class="mx-auto">
-                <v-list class="bg-teal-lighten-5">
-                  <v-list-item v-for="(item, index) in items" :key="item.id">
-                    <template v-slot:prepend>
-                      <v-list-item-action start>
-                        <v-checkbox-btn color="success" :model-value=item.completed
-                          @click="completeTodo(item)"></v-checkbox-btn>
-                      </v-list-item-action>
-                    </template>
+                <v-list class="">
 
-                    <v-list-item-title @blur="changed(item)" @keypress.enter="changed(item)" :id="item.id"
-                      :class="{ linethrough: item.completed }">{{ item.description }}</v-list-item-title>
+                  <v-slide-y-transition class="py-0" group tag="v-list">
+                    <v-list-item v-for="(item, index) in items" :key="item.id" border="md secondary opacity-75"
+                      class="my-2 rounded-lg">
+                      <template v-slot:prepend>
+                        <v-list-item-action start>
+                          <v-checkbox-btn color="secondary" :model-value=item.completed
+                            @click="completeTodo(item)"></v-checkbox-btn>
+                        </v-list-item-action>
+                      </template>
 
-                    <template v-slot:append>
-                      <v-btn :id="'btnEdit' + index" color="grey-lighten-1" icon="mdi-pencil" variant="text"
-                        @click="editTodo(item)" @mousedown="stopBlur($event)"></v-btn>
-                      <v-btn color="grey-lighten-1" icon="mdi-close" variant="text" @click="deleteTodo(item)"></v-btn>
-                    </template>
+                      <v-list-item-title @blur="changed(item)" @keypress.enter="changed(item)" :id="item.id"
+                        :class="{ linethrough: item.completed }">{{ item.description }}</v-list-item-title>
 
-                  </v-list-item>
+                      <template v-slot:append>
+                        <v-btn :id="'btnEdit' + index" color="secondary" icon="mdi-pencil" variant="text"
+                          @click="editTodo(item)" @mousedown="stopBlur($event)"></v-btn>
+                        <v-btn color="error" icon="mdi-delete" variant="text" @click="deleteTodo(item)"></v-btn>
+                      </template>
+
+                    </v-list-item>
+                  </v-slide-y-transition>
+
+
                 </v-list>
+
               </v-sheet>
               <!-- </v-card> -->
             </v-col>
@@ -67,13 +105,13 @@
             <v-col sm="12" md="4">
               <v-sheet class="ma-2 pa-2 bg-primary-darken-2">
                 <h2 class="text-h2 my-6">Getting stuff done starts with a list</h2>
-                <v-img class="d-flex d-md-none mx-2" :src="noteList" max-width="450"
-                  contained></v-img>
+                <v-img class="d-flex d-md-none mx-2" :src="noteList" max-width="450" contained></v-img>
                 <p class="text-h5 my-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                   incididunt ut labore
                   et
                   dolore magna aliqua.</p>
-                <v-btn elevation="0" variant="outlined" color="secondary" size="x-large" class="my-3">Get started for
+                <v-btn elevation="0" variant="outlined" color="secondary" size="x-large" class="my-3" href="/login">Get
+                  started for
                   free</v-btn>
               </v-sheet>
             </v-col>
@@ -85,15 +123,14 @@
 
         <v-container class="my-12 bg-surface">
           <v-row justify="center">
-            <v-col xs="12" sm="8" class="">
-              <h1 class="text-h2 text-center text-primary-darken-2">Features</h1>
+            <v-col xs="12" sm="8">
+              <h1 class="text-h2 text-center text-primary-darken-2 my-5">Features</h1>
               <h5 class="text-h6 text-center">Boost productivity, reduce stress, and stay organized with HowDO. Prioritize
                 tasks, meet deadlines, and achieve goals effortlessly. Your path to success starts with simple, efficient
                 planning.</h5>
             </v-col>
           </v-row>
           <v-row no-gutters justify="center">
-
 
             <v-col cols="12" md="4">
               <v-sheet class="ma-2 pa-2">
@@ -123,16 +160,17 @@
                   and witness your progress daily. No goal is too big when you break it down into manageable tasks!</p>
               </v-sheet>
             </v-col>
+
           </v-row>
         </v-container>
 
         <v-container class="bg-surface pb-15">
-          <h1 class="text-h2 text-center text-primary-darken-2">Pricing Plans</h1>
+          <h1 class="text-h2 text-center text-primary-darken-2 my-5">Pricing Plans</h1>
           <!-- <v-row justify="center" class="mx-16 px-16"> -->
           <v-row justify="center">
             <v-col cols="12" md="4">
               <v-card border rounded elevation="4" class="fill-height ma-2 pa-2 d-flex flex-column">
-                <h2 class="text-h5 align-center justify-center text-center">Free</h2>
+                <h2 class="text-h5 align-center justify-center text-center my-4">Free</h2>
                 <h2 class="text-h3 align-center justify-center text-center">£0<span class="text-h6"> / mo</span></h2>
                 <v-list>
                   <v-list-item title="Create, edit, and delete tasks.">
@@ -153,7 +191,8 @@
                 </v-list>
                 <v-spacer></v-spacer>
                 <v-card-actions class="justify-center">
-                  <v-btn elevation="0" variant="flat" color="secondary" size="x-large" class="my-3">Get started
+                  <v-btn elevation="0" variant="flat" color="secondary" size="x-large" class="my-3" href="/login">Get
+                    started
                     now</v-btn>
                 </v-card-actions>
               </v-card>
@@ -161,7 +200,7 @@
 
             <v-col cols="12" md="4">
               <v-card border rounded elevation="4" class="fill-height ma-2 pa-2 d-flex flex-column">
-                <h2 class="text-h5 align-center justify-center text-center">Standard</h2>
+                <h2 class="text-h5 align-center justify-center text-center my-4">Standard</h2>
                 <h2 class="text-h3 align-center justify-center text-center">£2.49<span class="text-h6"> / mo</span></h2>
                 <v-list>
                   <v-list-item title="Create, edit, and delete tasks.">
@@ -179,7 +218,7 @@
                       <v-icon icon="mdi-check" color="secondary"></v-icon>
                     </template>
                   </v-list-item>
-                  <v-list-item title="Share tasks with others and collaborate on projects in real-time.">
+                  <v-list-item title="Share tasks with others and collaborate">
                     <template v-slot:prepend>
                       <v-icon icon="mdi-check" color="secondary"></v-icon>
                     </template>
@@ -187,7 +226,8 @@
                 </v-list>
                 <v-spacer></v-spacer>
                 <v-card-actions class="justify-center">
-                  <v-btn elevation="0" variant="flat" color="secondary" size="x-large" class="my-3">Get started
+                  <v-btn elevation="0" variant="flat" color="secondary" size="x-large" class="my-3" href="/login">Get
+                    started
                     now</v-btn>
                 </v-card-actions>
               </v-card>
@@ -195,7 +235,7 @@
 
             <v-col cols="12" md="4">
               <v-card border rounded elevation="4" class="fill-height ma-2 pa-2 d-flex flex-column">
-                <h2 class="text-h5 align-center justify-center text-center">Premium</h2>
+                <h2 class="text-h5 align-center justify-center text-center my-4">Premium</h2>
                 <h2 class="text-h3 align-center justify-center text-center">£5.99<span class="text-h6"> / mo</span></h2>
                 <v-list>
                   <v-list-item title="Create, edit, and delete tasks.">
@@ -213,7 +253,7 @@
                       <v-icon icon="mdi-check" color="secondary"></v-icon>
                     </template>
                   </v-list-item>
-                  <v-list-item title="Share tasks with others and collaborate on projects in real-time">
+                  <v-list-item title="Share tasks with others and collaborate">
                     <template v-slot:prepend>
                       <v-icon icon="mdi-check" color="secondary"></v-icon>
                     </template>
@@ -247,7 +287,8 @@
 
 
 
-      <v-footer class="bg-secondary text-center d-flex flex-column mt-16">
+      <v-footer class="bg-secondary text-center text-primary-darken-2 d-flex flex-column mt-16"
+        v-if="clientPrincipal.clientPrincipal == undefined">
         <div>
           <v-btn class="mx-4" icon="mdi-facebook" variant="text"></v-btn>
           <v-btn class="mx-4" icon="mdi-twitter" variant="text"></v-btn>
@@ -468,5 +509,10 @@ async function completeTodo(item) {
 
 div[contenteditable="true"] {
   /* border: solid black 1px; */
+}
+
+
+.round-button {
+  border-radius: 100%;
 }
 </style>

@@ -7,7 +7,7 @@ module.exports = async function (context, req) {
     context.log("Deleting todo id=" + context.bindingData.id);
 
     const header = req.headers['x-ms-client-principal'];
-    const currentUser = new CurrentUser({header: header});
+    const currentUser = new CurrentUser(header);
     const userId = await currentUser.getCurrentUser();
 
     const cosmosClient = new CosmosClient({
@@ -29,10 +29,9 @@ module.exports = async function (context, req) {
             process.exit(1)
         })
 
-    // create the item
+    // delete the item
     await taskDao.deleteItem(context.bindingData.id);
 
-    // return the created item
     context.res = {
         status: 200
     };

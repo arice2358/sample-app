@@ -6,7 +6,7 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     const header = req.headers['x-ms-client-principal'];
-    const currentUser = new CurrentUser({header: header});
+    const currentUser = new CurrentUser(header);
     const userId = await currentUser.getCurrentUser();
 
     const cosmosClient = new CosmosClient({
