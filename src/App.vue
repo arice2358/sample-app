@@ -120,7 +120,7 @@
             </v-col>
           </v-row>
         </v-container>
-
+   
         <v-container class="my-12 bg-surface">
           <v-row justify="center">
             <v-col xs="12" sm="8">
@@ -276,7 +276,8 @@
                 </v-list>
                 <v-spacer></v-spacer>
                 <v-card-actions class="justify-center">
-                  <v-btn elevation="0" variant="flat" color="secondary" size="x-large" class="my-3">Get started
+                  <v-btn elevation="0" variant="flat" color="secondary" size="x-large" class="my-3" href="/login">Get
+                    started
                     now</v-btn>
                 </v-card-actions>
               </v-card>
@@ -295,6 +296,10 @@
           <v-btn class="mx-4" icon="mdi-linkedin" variant="text"></v-btn>
           <v-btn class="mx-4" icon="mdi-instagram" variant="text"></v-btn>
         </div>
+
+        <div><a href="https://storyset.com/app" target="_blank">App illustrations by Storyset</a></div>
+
+        <v-divider></v-divider>
 
         <div class="pt-0">
           Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut
