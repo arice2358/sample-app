@@ -12,7 +12,7 @@
                             "clientSecretSettingName": "AADB2C_PROVIDER_CLIENT_SECRET"
                         },
                         "openIdConnectConfiguration": {
-                            "wellKnownOpenIdConfiguration": "https://sampleB2Corg.b2clogin.com/03c2288d-2ac9-49e6-8699-5fc9bf014a0b/B2C_1A_SIGNUP_SIGNIN/v2.0/.well-known/openid-configuration"
+                            "wellKnownOpenIdConfiguration": "https://sampleB2Corg.b2clogin.com/03c2288d-2ac9-49e6-8699-5fc9bf014a0b/B2C_1A_DISPLAYCONTROL_SIGNUP_SIGNIN/v2.0/.well-known/openid-configuration"
                         }
                     },
                     "login": {
