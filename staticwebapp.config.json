@@ -16,7 +16,7 @@
                         }
                     },
                     "login": {
-                        "nameClaimType": "emails",
+                        "nameClaimType": "email",
                         "scopes": [
                             "openid",
                             "profile",
