@@ -16,10 +16,11 @@
                         }
                     },
                     "login": {
-                        "nameClaimType": "email",
+                        "nameClaimType": "emails",
                         "scopes": [
                             "openid",
-                            "profile"
+                            "profile",
+                            "offline_access"
                         ],
                         "loginParameterNames": []
                     }
