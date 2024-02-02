@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "custom_email_function": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7097",
+      "launchBrowser": false
+    }
+  }
+}

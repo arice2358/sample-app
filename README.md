@@ -1,32 +1,5 @@
-# Vue Basic
+# Introduction
 
-[Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) allows you to easily build [Vue.js](https://vuejs.org/) apps in minutes. Use this repo with the [Vue quickstart](https://docs.microsoft.com/azure/static-web-apps/getting-started?tabs=vue) to build and customize a new static site.
+HowDo is a demo todo list application built using Vue and Vuetify. The purpose of this project was to understand what would be required, and the ultimate cost, of deploying a typical 3-tier application to Microsoft Azure.
 
-## Project setup
-
-```bash
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```bash
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```bash
-npm run build
-```
-
-### Lints and fixes files
-
-```bash
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
+More details about the project can be found in a series of posts on my blog.
