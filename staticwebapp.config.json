@@ -49,7 +49,7 @@
             "allowedRoles": [
                 "authenticated"
             ],
-            "redirect": "https://sampleB2Corg.b2clogin.com/03c2288d-2ac9-49e6-8699-5fc9bf014a0b/oauth2/v2.0/authorize?p=B2C_1_profile&client_id=9c188c62-253a-4795-8eb7-606f17ce5993&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fnice-wave-049615103.3.azurestaticapps.net%2F.auth%2Flogin%2Faadb2c%2Fcallback&scope=openid&response_type=code"
+            "redirect": "https://sampleB2Corg.b2clogin.com/03c2288d-2ac9-49e6-8699-5fc9bf014a0b/oauth2/v2.0/authorize?p=B2C_1A_PROFILEEDIT&client_id=9c188c62-253a-4795-8eb7-606f17ce5993&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fhowdo.adamrice.dev%2F.auth%2Flogin%2Faadb2c%2Fcallback&scope=openid&response_type=code&prompt=login"
         }
     ],
     "responseOverrides": {

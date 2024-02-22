@@ -281,7 +281,7 @@
             <!-- <DisplayClaim ClaimTypeReferenceId="displayName" Required="true" /> -->
             <!-- <DisplayClaim ClaimTypeReferenceId="givenName" Required="true" /> -->
             <!-- <DisplayClaim ClaimTypeReferenceId="surName" Required="true" /> -->
-            <DisplayClaim ClaimTypeReferenceId="email" Required="true" />
+            <!-- <DisplayClaim ClaimTypeReferenceId="email" Required="true" /> -->
             <DisplayClaim ClaimTypeReferenceId="newPassword" Required="true" />
             <DisplayClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
           </DisplayClaims>
