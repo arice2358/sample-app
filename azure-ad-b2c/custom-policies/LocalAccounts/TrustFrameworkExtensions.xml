@@ -106,6 +106,19 @@
 
   <ClaimsProviders>
 
+    <ClaimsProvider>
+      <DisplayName>Azure Active Directory</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="AAD-Common">
+          <Metadata>
+            <!--Insert b2c-extensions-app application ID here, for example: 11111111-1111-1111-1111-111111111111-->  
+            <Item Key="ClientId">b3ca3e5f-f1b3-4330-aaa4-d246de91d397</Item>
+            <!--Insert b2c-extensions-app application ObjectId here, for example: 22222222-2222-2222-2222-222222222222-->
+            <Item Key="ApplicationObjectId">70a951cf-f467-4edd-8034-21ce5efa6b05</Item>
+          </Metadata>
+        </TechnicalProfile>
+      </TechnicalProfiles> 
+    </ClaimsProvider>
 
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>

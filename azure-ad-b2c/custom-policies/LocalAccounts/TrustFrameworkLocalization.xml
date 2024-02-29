@@ -238,6 +238,7 @@
           <LocalizedString ElementType="ClaimType" ElementId="surname" StringId="UserHelpText">Your surname (also known as family name or last name).</LocalizedString>
           <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="DisplayName">Given Name</LocalizedString>
           <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="UserHelpText">Your given name (also known as first name).</LocalizedString>
+
           <LocalizedString ElementType="UxElement" StringId="button_continue">Continue</LocalizedString>
           <LocalizedString ElementType="UxElement" StringId="button_cancel">Cancel</LocalizedString>
         </LocalizedStrings>

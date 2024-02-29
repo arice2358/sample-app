@@ -293,6 +293,25 @@
         <UserInputType>TextBox</UserInputType>
       </ClaimType>
 
+      <ClaimType Id="city">
+        <DisplayName>City where you work</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>DropdownSingleSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Berlin" Value="Berlin" />
+          <Enumeration Text="London" Value="London" />
+          <Enumeration Text="Seattle" Value="Seattle" />
+        </Restriction>
+      </ClaimType>
+
+      <ClaimType Id="extension_dateOfBirth">
+        <DisplayName>Date of Birth</DisplayName>
+        <DataType>date</DataType>
+        <UserHelpText>Your date of birth</UserHelpText>
+        <UserInputType>DateTimeDropdown</UserInputType>
+      </ClaimType>
+
+
     </ClaimsSchema>
 
     <ClaimsTransformations>
@@ -476,12 +495,14 @@
 
         <TechnicalProfile Id="AAD-Common">
           <DisplayName>Azure Active Directory</DisplayName>
+
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureActiveDirectoryProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
 
           <CryptographicKeys>
             <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
           </CryptographicKeys>
 
+          
           <!-- We need this here to suppress the SelfAsserted provider from invoking SSO on validation profiles. -->
           <IncludeInSso>false</IncludeInSso>
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
@@ -583,6 +604,8 @@
             <!-- Optional claims -->
             <PersistedClaim ClaimTypeReferenceId="givenName" />
             <PersistedClaim ClaimTypeReferenceId="surname" />
+            <PersistedClaim ClaimTypeReferenceId="extension_dateOfBirth" />
+            <PersistedClaim ClaimTypeReferenceId="city" />
           </PersistedClaims>
           <IncludeTechnicalProfile ReferenceId="AAD-Common" />
         </TechnicalProfile>
@@ -605,6 +628,8 @@
             <OutputClaim ClaimTypeReferenceId="otherMails" />
             <OutputClaim ClaimTypeReferenceId="givenName" />
             <OutputClaim ClaimTypeReferenceId="surname" />
+            <OutputClaim ClaimTypeReferenceId="city" />
+            <OutputClaim ClaimTypeReferenceId="extension_dateOfBirth" />
           </OutputClaims>
           <IncludeTechnicalProfile ReferenceId="AAD-Common" />
         </TechnicalProfile>
@@ -630,6 +655,8 @@
                  ValidationTechnicalProfile referenced below so it can be written to directory after being updated by the user, i.e. AAD-UserWriteProfileUsingObjectId. -->
             <InputClaim ClaimTypeReferenceId="givenName" />
             <InputClaim ClaimTypeReferenceId="surname" />
+            <InputClaim ClaimTypeReferenceId="extension_dateOfBirth" />
+            <InputClaim ClaimTypeReferenceId="city" />
           </InputClaims>
           <OutputClaims>
             <!-- Required claims -->
@@ -639,6 +666,9 @@
                  ValidationTechnicalProfile referenced below so it can be written to directory after being updated by the user, i.e. AAD-UserWriteProfileUsingObjectId. -->
             <OutputClaim ClaimTypeReferenceId="givenName" />
             <OutputClaim ClaimTypeReferenceId="surname" />
+            <OutputClaim ClaimTypeReferenceId="extension_dateOfBirth" />
+            <OutputClaim ClaimTypeReferenceId="city" />
+
           </OutputClaims>
           <ValidationTechnicalProfiles>
             <ValidationTechnicalProfile ReferenceId="AAD-UserWriteProfileUsingObjectId" />
