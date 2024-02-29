@@ -343,9 +343,6 @@ onMounted(async () => {
 
   if (clientPrincipal.value.clientPrincipal != null) {
     await listTodos();
-
-    // get profile info
-    await getProfile();
   }
 });
 
@@ -472,19 +469,6 @@ async function completeTodo(item) {
   });
 
   await listTodos();
-}
-
-
-async function getProfile() {
-  const endpoint = "https://graph.microsoft.com/v1.0/users/be66b10c-24fd-4436-8dc7-18bf808edd7f"
-  const response = await fetch(endpoint, {
-    method: "GET",
-  });
-
-  const result = await response.json();
-
-  console.log(result);
-
 }
 </script>
 
