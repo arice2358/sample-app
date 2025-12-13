@@ -66,7 +66,7 @@
           <InputParameter Id="Messages.0.TemplateLanguage" DataType="boolean" Value="true"/>
 
           <!-- Update with an email appropriate for your organization. -->
-          <InputParameter Id="Messages.0.From.Email" DataType="string" Value="noreply@adamrice.dev"/>
+          <InputParameter Id="Messages.0.From.Email" DataType="string" Value="DoNotReply@adamrice.dev"/>
         </InputParameters>
         <OutputClaims>
           <OutputClaim ClaimTypeReferenceId="emailRequestBody" TransformationClaimType="outputClaim"/>
@@ -309,7 +309,7 @@
           <IncludeTechnicalProfile ReferenceId="AAD-Common"/>
         </TechnicalProfile>
 
-        
+
       </TechnicalProfiles>
     </ClaimsProvider>
   </ClaimsProviders>
